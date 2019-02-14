@@ -6,6 +6,10 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,11 +32,21 @@ public class UserResource {
 	}
 	// get users by Id 
 	@GetMapping("/users/{id}")
-	public User retrieveUser(@PathVariable int id) {
+	public Resource<User> retrieveUser(@PathVariable int id) {
 		User user = userDaoService.findOne(id);
 		if (user == null)
 			throw new UserNotFoundException("id-" + id);
-		return user;
+		
+		/*
+		 * HATEOAS : (Hypermedia as the Engine of Application State) 
+		 * Creating a link to retrieve all the users based on method name (for this we have dependency provied by springboot).
+		 *  Here we are returning both data and the link to the other resource with reference all-users.
+		 */
+		Resource<User> resource = new Resource<User>(user);
+		ControllerLinkBuilder linkTo =linkTo(methodOn(this.getClass()).retrieveAllUser());
+		
+		resource.add(linkTo.withRel("all-user"));
+		return resource;
 	}
 	
 	// delete user by Id
