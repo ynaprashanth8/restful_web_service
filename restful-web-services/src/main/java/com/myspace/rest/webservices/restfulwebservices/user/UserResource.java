@@ -28,7 +28,9 @@ public class UserResource {
     // get users list 
 	@GetMapping("/users")
 	public List<User> retrieveAllUser(){
-		return userDaoService.findAll();
+		List<User> users = userDaoService.findAll();
+		if(users.isEmpty()) throw new UserNotFoundException("user is null");
+		return users;
 	}
 	// get users by Id 
 	@GetMapping("/users/{id}")
