@@ -56,13 +56,13 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.4.0</version>
 		</dependency>
-		<!-- Monitoring our app, gathering metrics, understanding traffic....  -->
+		<!-- Monitoring our app, gathering metrics, understanding traffic....  http://localhost:8080/actuator-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		
-		<!-- browse the actuator -->
+		<!-- browse the actuator http://localhost:8080/browser/index.html#/actuator-->
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-rest-hal-browser</artifactId>

@@ -26,7 +26,7 @@ public class SwaggerConfig {
 	          DEFAULT_CONTACT, "Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0");
 
 	private static final Set<String> DEFAULT_PRODUCERS_AND_CONSUMERS = new HashSet<String>(Arrays.asList("application/json","application/xml"));
-	
+	//http://localhost:8080/swagger-ui.html
 	//Bean - Docket
 	@Bean 
 	public Docket api() {
